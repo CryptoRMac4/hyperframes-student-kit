@@ -1,0 +1,89 @@
+/* ============================================================================
+   SI DESERT AUTHORITY: style tokens
+   Single source of palette / type / motion for every card in this pack.
+   Cards reference these vars and never hardcode colors, fonts, or easings.
+   Colors: Sonoran Intelligence brand system (six colors + terracotta-deep).
+   Fonts: Barlow Condensed + Barlow, matching live sonoranintel.com main.css
+   (Ryan ruling 2026-09-13). See DESIGN.md for the why.
+   ============================================================================ */
+
+/* Type. Vendored OFL woff2 in fonts/, no CDN at render. Paths resolve against
+   this stylesheet (pack root); verified in a Mini render 2026-09-13. */
+@font-face { font-family: "Barlow Condensed"; font-style: normal; font-weight: 600; font-display: block;
+  src: url("fonts/barlow-condensed-600.woff2") format("woff2"); }
+@font-face { font-family: "Barlow Condensed"; font-style: normal; font-weight: 700; font-display: block;
+  src: url("fonts/barlow-condensed-700.woff2") format("woff2"); }
+@font-face { font-family: "Barlow"; font-style: normal; font-weight: 400; font-display: block;
+  src: url("fonts/barlow-400.woff2") format("woff2"); }
+@font-face { font-family: "Barlow"; font-style: normal; font-weight: 500; font-display: block;
+  src: url("fonts/barlow-500.woff2") format("woff2"); }
+@font-face { font-family: "Barlow"; font-style: normal; font-weight: 600; font-display: block;
+  src: url("fonts/barlow-600.woff2") format("woff2"); }
+
+:root {
+  /* --- palette: exactly six brand colors + one derived deep terracotta ----- */
+  --saguaro:          #2D3A2E;  /* dominant dark surface + ink on light */
+  --terracotta:       #C8682E;  /* THE accent. One marker per card. Bone text only. */
+  --terracotta-deep:  #8F4A1E;  /* darker terracotta for small bone text on a terracotta fill */
+  --sand:             #E8D5B7;  /* warm light surface */
+  --bone:             #F5EDE0;  /* lightest surface + text on dark. Replaces white. */
+  --mesquite:         #3D2E1F;  /* body ink on light. Replaces black. */
+  --adobe:            #8B6F47;  /* eyebrows, rules, metadata on light */
+
+  /* derived alphas (opacity only, no new hues) */
+  --saguaro-plate:    rgba(45, 58, 46, 0.94);   /* tier2 dark plate over footage */
+  --bone-plate:       rgba(245, 237, 224, 0.96);/* tier2 light plate over footage */
+  --bone-dim:         rgba(245, 237, 224, 0.64);/* secondary text on saguaro */
+  --bone-line:        rgba(245, 237, 224, 0.16);/* hairline on saguaro */
+  --adobe-line:       rgba(139, 111, 71, 0.32); /* hairline on sand / bone */
+  --mesquite-dim:     rgba(61, 46, 31, 0.72);   /* secondary text on light */
+
+  /* semantic aliases the blueprint contract expects */
+  --bg:     var(--saguaro);
+  --fg:     var(--bone);
+  --accent: var(--terracotta);
+  --muted:  var(--bone-dim);
+
+  /* --- typography ---------------------------------------------------------- */
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body:    "Barlow", "Helvetica Neue", sans-serif;
+  --font-mono:    var(--font-body);   /* no mono face in this brand */
+
+  --wt-body: 400;
+  --wt-medium: 500;
+  --wt-semi: 600;
+  --wt-bold: 700;
+
+  /* video scale for 1920x1080 (readable in two seconds on a phone) */
+  --size-mega:     340px;  /* hero stat number */
+  --size-display:  132px;  /* thesis / section title */
+  --size-title:    92px;   /* quote, overview headline */
+  --size-headline: 60px;   /* tier2 headlines, names */
+  --size-body:     36px;   /* supporting copy */
+  --size-label:    26px;   /* eyebrow / kicker */
+  --size-tiny:     22px;   /* source lines, fine print */
+
+  --lh-display: 1.0;
+  --lh-body: 1.4;
+  --track-display: 0.005em;  /* live site h1-h3 */
+  --track-eyebrow: 0.24em;   /* live site .kicker is 0.28em at web size; slightly tighter for video */
+  --track-wordmark: 0.09em;  /* live site nav wordmark */
+
+  /* --- motion: steady, confident, firm ease-out ---------------------------- */
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);   /* ~power3.out */
+  --ease-in:  cubic-bezier(0.55, 0.055, 0.675, 0.19);/* ~power2.in */
+  /* GSAP string eases, read by cards via getComputedStyle */
+  --gsap-in:    power3.out;   /* entrances */
+  --gsap-wipe:  power2.inOut; /* rules, wipes, bars */
+  --gsap-out:   power2.in;    /* exits */
+  --gsap-count: power2.out;   /* count-ups and fills */
+  --dur-in:  0.7s;
+  --dur-out: 0.45s;
+  --stagger: 0.14s;
+
+  /* --- shape + safe zones ------------------------------------------------- */
+  --radius: 6px;             /* brand button radius */
+  --rule: 6px;               /* terracotta underline / marker thickness */
+  --safe-x: 120px;           /* title-safe side margin (beyond 5%) */
+  --safe-y: 96px;            /* title-safe top/bottom margin */
+}

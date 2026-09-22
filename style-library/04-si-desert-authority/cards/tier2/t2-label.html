@@ -1,0 +1,66 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · tier2 · label (transparent overlay)
+  A quiet bone tag in the top-right title-safe corner (clear of a left-of-center speaker) that names what is on
+  screen or what the speaker just said. Wipes open left to right, one
+  terracotta underline under the text, wipes closed.
+  Slots: tag, text.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #si-t2-label {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #si-t2-label .lbl {
+        position: absolute; right: 120px; top: 96px; display: flex; flex-direction: column;
+        padding: 22px 36px 28px; background: var(--bone-plate);
+        border: 1px solid var(--adobe-line); border-radius: var(--radius);
+      }
+      #si-t2-label .tag {
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 24px;
+        letter-spacing: 0.22em; text-transform: uppercase; color: var(--adobe); white-space: nowrap;
+      }
+      #si-t2-label .text {
+        --u: 1; align-self: flex-start; margin-top: 8px; padding-bottom: 8px; white-space: nowrap;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 58px; line-height: 1.05;
+        color: var(--mesquite);
+        background-image: linear-gradient(var(--terracotta), var(--terracotta));
+        background-repeat: no-repeat; background-position: 0 100%;
+        background-size: calc(var(--u) * 100%) var(--rule);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-t2-label" data-composition-id="si-t2-label" data-start="0" data-duration="3.5" data-width="1920" data-height="1080">
+      <div class="lbl">
+        <div class="tag" data-slot="tag">What customers see</div>
+        <div class="text" data-slot="text">Your Google Business Profile</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-t2-label");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s);
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".lbl"), { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: WIPE }, 0.05)
+          .fromTo(q(".tag"), { autoAlpha: 0, x: -16 }, { autoAlpha: 1, x: 0, duration: 0.45, ease: IN }, 0.3)
+          .fromTo(q(".text"), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: IN }, 0.4)
+          .fromTo(q(".text"), { "--u": 0 }, { "--u": 1, duration: 0.55, ease: WIPE }, 0.85)
+          .to(q(".lbl"), { clipPath: "inset(0% 0% 0% 100%)", duration: 0.45, ease: OUT }, 3.05);
+        window.__timelines["si-t2-label"] = tl;
+      })();
+    </script>
+  </body>
+</html>

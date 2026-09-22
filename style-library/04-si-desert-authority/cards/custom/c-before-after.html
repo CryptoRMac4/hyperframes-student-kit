@@ -1,0 +1,132 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · custom · before-after (opaque takeover)
+  One metric, then vs now, on bone. Colorblind-safe by construction: BEFORE is
+  left, smaller, lighter weight, adobe, labelled; AFTER is right, larger, bold,
+  saguaro, labelled, with the single terracotta underline. An arrow draws
+  between them. Both numbers count up (tabular) from 0.
+  Slots: kicker, metric, beforeLabel, beforeValue, afterLabel, afterValue, note.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: var(--bone); }
+      #si-c-before-after {
+        position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden;
+        background: var(--bone); color: var(--mesquite); font-family: var(--font-body);
+      }
+      #si-c-before-after .head { position: absolute; left: 180px; top: 120px; width: 1560px; }
+      #si-c-before-after .kicker {
+        display: flex; align-items: center; gap: 22px;
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 28px;
+        letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--adobe);
+      }
+      #si-c-before-after .kicker .dash { width: 56px; height: 3px; background: var(--adobe); flex: none; }
+      #si-c-before-after .metric {
+        margin-top: 18px; max-width: 1500px; text-wrap: balance;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 96px;
+        line-height: 1.0; letter-spacing: var(--track-display); color: var(--mesquite);
+      }
+      #si-c-before-after .cols {
+        position: absolute; left: 180px; top: 380px; width: 1560px; height: 500px;
+        display: grid; grid-template-columns: 560px 300px 1fr; align-items: end;
+      }
+      #si-c-before-after .lab {
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 34px;
+        letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap;
+      }
+      #si-c-before-after .val {
+        display: grid; justify-items: start; margin-top: 10px;
+        font-family: var(--font-display); line-height: 0.86; letter-spacing: -0.01em;
+        font-variant-numeric: tabular-nums lining-nums; white-space: nowrap;
+      }
+      #si-c-before-after .val [data-slot], #si-c-before-after .val .count { grid-area: 1 / 1; }
+      #si-c-before-after .val [data-slot] { visibility: hidden; }
+      #si-c-before-after .before .lab { color: var(--mesquite-dim); }
+      #si-c-before-after .before .val { font-weight: var(--wt-semi); font-size: 250px; color: var(--adobe); }
+      #si-c-before-after .after .lab { color: var(--saguaro); }
+      #si-c-before-after .after .val { font-weight: var(--wt-bold); font-size: 380px; color: var(--saguaro); }
+      #si-c-before-after .after .underline { grid-area: 2 / 1; justify-self: stretch; height: var(--rule); background: var(--terracotta); margin-top: 16px; }
+      #si-c-before-after .arrow { width: 260px; height: 80px; align-self: center; margin-top: 150px; }
+      #si-c-before-after .arrow path { fill: none; stroke: var(--saguaro); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; }
+      #si-c-before-after .note {
+        position: absolute; left: 180px; top: 930px; width: 1560px; text-wrap: balance;
+        font-size: 38px; font-weight: var(--wt-medium); color: var(--mesquite-dim);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-c-before-after" data-composition-id="si-c-before-after" data-start="0" data-duration="6.5" data-width="1920" data-height="1080">
+      <div class="head">
+        <div class="kicker"><span class="dash"></span><span data-slot="kicker">Client result, City</span></div>
+        <div class="metric" data-slot="metric">Calls from Google each month</div>
+      </div>
+      <div class="cols">
+        <div class="before">
+          <div class="lab" data-slot="beforeLabel">Before</div>
+          <div class="val"><span data-slot="beforeValue">12</span></div>
+        </div>
+        <svg class="arrow" viewBox="0 0 260 80" aria-hidden="true">
+          <path d="M20 40 H232" pathLength="100" />
+          <path d="M204 14 L236 40 L204 66" pathLength="100" />
+        </svg>
+        <div class="after">
+          <div class="lab" data-slot="afterLabel">After 90 days</div>
+          <div class="val"><span data-slot="afterValue">41</span><div class="underline"></div></div>
+        </div>
+      </div>
+      <div class="note" data-slot="note">Same crew, same trucks. The only change was how they show up online.</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-c-before-after");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in"), COUNT = ease("--gsap-count", "power2.out");
+        const q = (s) => root.querySelector(s), qa = (s) => root.querySelectorAll(s);
+
+        function counterFor(slotEl) {
+          const raw = slotEl.textContent.trim();
+          const m = raw.match(/^([^0-9]*)([0-9][0-9,]*\.?[0-9]*)(.*)$/);
+          const pre = m ? m[1] : "", suf = m ? m[3] : "";
+          const digits = m ? m[2].replace(/,/g, "") : "0";
+          const target = parseFloat(digits) || 0;
+          const dec = digits.includes(".") ? digits.split(".")[1].length : 0;
+          const commas = m ? m[2].includes(",") : false;
+          const live = document.createElement("span");
+          live.className = "count";
+          slotEl.after(live);
+          const state = { v: 0 };
+          const paint = () => {
+            const s = commas
+              ? state.v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec })
+              : state.v.toFixed(dec);
+            live.textContent = m ? pre + s + suf : raw;
+          };
+          paint();
+          return { state, target, paint };
+        }
+        const b = counterFor(q('[data-slot="beforeValue"]'));
+        const a = counterFor(q('[data-slot="afterValue"]'));
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".kicker"), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: IN }, 0.1)
+          .fromTo(q(".metric"), { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: IN }, 0.2)
+          .fromTo(q(".before"), { autoAlpha: 0, x: -50 }, { autoAlpha: 1, x: 0, duration: 0.7, ease: IN }, 0.7)
+          .fromTo(b.state, { v: 0 }, { v: b.target, duration: 0.9, ease: COUNT, onUpdate: b.paint }, 0.75)
+          .fromTo(qa(".arrow path"), { strokeDashoffset: 100 }, { strokeDashoffset: 0, duration: 0.55, ease: WIPE, stagger: 0.25 }, 1.45)
+          .fromTo(q(".after"), { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: 0.7, ease: IN }, 1.9)
+          .fromTo(a.state, { v: 0 }, { v: a.target, duration: 1.3, ease: COUNT, onUpdate: a.paint }, 1.95)
+          .fromTo(q(".after .underline"), { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.6, ease: WIPE }, 3.0)
+          .fromTo(q(".note"), { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: IN }, 3.2)
+          .to([q(".head"), q(".cols"), q(".note")], { autoAlpha: 0, y: -40, duration: 0.45, ease: OUT, stagger: 0.03 }, 5.99);
+        window.__timelines["si-c-before-after"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · tier1 · overview (opaque takeover)
+  The plan in 3-4 steps on sand. Eyebrow + headline with one terracotta rule,
+  then an adobe track draws left to right while each numbered step lands on it.
+  Step numbers come from a CSS counter, so Agent 3 only fills title + detail.
+  Slots: kicker, headline, steps (list of 3-4 <li><span class="t">..</span><span class="d">..</span></li>).
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: var(--sand); }
+      #si-t1-overview {
+        position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden;
+        background: var(--sand); color: var(--mesquite); font-family: var(--font-body);
+      }
+      #si-t1-overview .head { position: absolute; left: 180px; top: 150px; width: 1560px; }
+      #si-t1-overview .kicker {
+        display: flex; align-items: center; gap: 22px;
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 28px;
+        letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--adobe);
+      }
+      #si-t1-overview .kicker .dash { width: 56px; height: 3px; background: var(--adobe); flex: none; }
+      #si-t1-overview .headline {
+        margin-top: 22px; max-width: 1400px; text-wrap: balance;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 104px;
+        line-height: 1.0; letter-spacing: var(--track-display); color: var(--mesquite);
+      }
+      #si-t1-overview .rule { width: 160px; height: var(--rule); background: var(--terracotta); margin-top: 32px; }
+      #si-t1-overview .track {
+        position: absolute; left: 180px; top: 560px; width: 1560px; height: 2px; background: var(--adobe-line);
+      }
+      #si-t1-overview ol {
+        position: absolute; left: 180px; top: 552px; width: 1560px; margin: 0; padding: 0;
+        list-style: none; counter-reset: step;
+        display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; column-gap: 56px;
+      }
+      #si-t1-overview li { counter-increment: step; position: relative; padding-top: 44px; }
+      #si-t1-overview li::after {
+        content: ""; position: absolute; left: 0; top: 0; width: 18px; height: 18px;
+        border-radius: 50%; background: var(--saguaro);
+      }
+      #si-t1-overview li::before {
+        content: counter(step, decimal-leading-zero); display: block;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 84px; line-height: 1;
+        color: var(--adobe); font-variant-numeric: tabular-nums lining-nums;
+      }
+      #si-t1-overview li .t {
+        display: block; margin-top: 18px; text-wrap: balance;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 54px; line-height: 1.02; color: var(--mesquite);
+      }
+      #si-t1-overview li .d {
+        display: block; margin-top: 16px; text-wrap: balance;
+        font-size: 30px; line-height: 1.4; color: var(--mesquite-dim);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-t1-overview" data-composition-id="si-t1-overview" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="head">
+        <div class="kicker"><span class="dash"></span><span data-slot="kicker">How the first 90 days go</span></div>
+        <div class="headline" data-slot="headline">Four steps from quiet phone to booked jobs</div>
+        <div class="rule"></div>
+      </div>
+      <div class="track"></div>
+      <ol data-slot="steps">
+        <li><span class="t">Audit</span><span class="d">Where you show up, and where you vanish.</span></li>
+        <li><span class="t">Fix the listing</span><span class="d">A Google profile that earns the click.</span></li>
+        <li><span class="t">Earn reviews</span><span class="d">Ask every happy customer, automatically.</span></li>
+        <li><span class="t">Track calls</span><span class="d">Count calls and jobs, not clicks.</span></li>
+      </ol>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-t1-overview");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s), qa = (s) => root.querySelectorAll(s);
+        const steps = qa("ol li");
+        const each = 0.38;
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".kicker"), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: IN }, 0.1)
+          .fromTo(q(".headline"), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.75, ease: IN }, 0.2)
+          .fromTo(q(".rule"), { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.55, ease: WIPE }, 0.8)
+          .fromTo(q(".track"), { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.6 + steps.length * each, ease: "power1.inOut" }, 0.95)
+          .fromTo(steps, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: IN, stagger: each }, 1.05)
+          .to([q(".head"), q(".track"), q("ol")], { autoAlpha: 0, y: -40, duration: 0.45, ease: OUT, stagger: 0.04 }, 5.47);
+        window.__timelines["si-t1-overview"] = tl;
+      })();
+    </script>
+  </body>
+</html>

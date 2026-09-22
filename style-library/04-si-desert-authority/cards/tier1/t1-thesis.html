@@ -1,0 +1,88 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · tier1 · thesis (opaque takeover)
+  The one-sentence point of the video. Saguaro field, horizon motif, a big
+  Barlow Condensed statement with ONE terracotta underline under the <em>
+  phrase (drawn with a CSS var so it follows line wraps), then a plain sand
+  follow-up line.
+  Slots: kicker, headline (richtext, wrap the key phrase in <em>), sub.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: var(--saguaro); }
+      #si-t1-thesis {
+        position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden;
+        background: var(--saguaro); color: var(--bone); font-family: var(--font-body);
+      }
+      #si-t1-thesis .horizon { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      #si-t1-thesis .horizon path { fill: none; stroke: var(--bone-line); stroke-width: 2; stroke-dasharray: 100; }
+      #si-t1-thesis .wrap {
+        position: absolute; left: 180px; top: 40px; width: 1560px; height: 860px;
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      #si-t1-thesis .kicker {
+        display: flex; align-items: center; gap: 22px;
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: var(--size-label);
+        letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--sand);
+      }
+      #si-t1-thesis .kicker .dash { width: 56px; height: 3px; background: var(--sand); flex: none; }
+      #si-t1-thesis .headline {
+        margin-top: 34px; max-width: 1380px; text-wrap: balance;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: var(--size-display);
+        line-height: 1.02; letter-spacing: var(--track-display); color: var(--bone);
+      }
+      #si-t1-thesis .headline em {
+        --u: 1; font-style: normal;
+        background-image: linear-gradient(var(--terracotta), var(--terracotta));
+        background-repeat: no-repeat; background-position: 0 100%;
+        background-size: calc(var(--u) * 100%) var(--rule);
+        padding-bottom: 0.06em;
+        -webkit-box-decoration-break: clone; box-decoration-break: clone;
+      }
+      #si-t1-thesis .sub {
+        margin-top: 48px; max-width: 36ch; text-wrap: balance;
+        font-size: 46px; font-weight: var(--wt-body); line-height: 1.35; color: var(--sand);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-t1-thesis" data-composition-id="si-t1-thesis" data-start="0" data-duration="5.5" data-width="1920" data-height="1080">
+      <svg class="horizon" viewBox="0 0 1920 1080" aria-hidden="true">
+        <path d="M0 930 H1920" pathLength="100" />
+        <path d="M1300 930 A 300 300 0 0 1 1900 930" pathLength="100" />
+        <path d="M1390 930 A 210 210 0 0 1 1810 930" pathLength="100" />
+      </svg>
+      <div class="wrap">
+        <div class="kicker"><span class="dash"></span><span data-slot="kicker">The short version</span></div>
+        <div class="headline" data-slot="headline">Your next customer is asking AI <em>who to call.</em></div>
+        <div class="sub" data-slot="sub">Most local businesses never come up. That part is fixable.</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-t1-thesis");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s), qa = (s) => root.querySelectorAll(s);
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(qa(".horizon path"), { strokeDashoffset: 100 }, { strokeDashoffset: 0, duration: 1.6, ease: WIPE, stagger: 0.18 }, 0)
+          .fromTo(q(".kicker"), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: IN }, 0.15)
+          .fromTo(q(".headline"), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: IN }, 0.3);
+        const em = qa(".headline em");
+        if (em.length) tl.fromTo(em, { "--u": 0 }, { "--u": 1, duration: 0.7, ease: WIPE }, 1.2);
+        tl.fromTo(q(".sub"), { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: IN }, 1.5)
+          .fromTo(q(".wrap"), { y: 0 }, { y: -8, duration: 2.85, ease: "none" }, 2.2)
+          .to(q(".wrap"), { autoAlpha: 0, y: -48, duration: 0.45, ease: OUT }, 5.05);
+        window.__timelines["si-t1-thesis"] = tl;
+      })();
+    </script>
+  </body>
+</html>

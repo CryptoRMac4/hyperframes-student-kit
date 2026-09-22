@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/style-library/build-registry.mjs",
-  "styleCount": 2,
-  "cardCount": 406,
+  "styleCount": 4,
+  "cardCount": 431,
   "tiers": [
     "tier1",
     "tier2",
@@ -8592,6 +8592,568 @@
           "preview": {
             "mp4": "02-kallaway/preview/kallaway.t2.label.warning.mp4",
             "poster": "02-kallaway/preview/kallaway.t2.label.warning.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lbw-deep-surrender",
+      "number": "03",
+      "name": "LBW Deep Surrender",
+      "status": "draft",
+      "folder": "03-lbw-deep-surrender",
+      "inspiration": "Liquid Breathwork's own Deep Surrender web brand system (liquidbreathwork.com), translated to 1920x1080 video. Deep water at night: still, weighted, gold reserved for accents.",
+      "palette": {
+        "bg": "#0a1628",
+        "fg": "#f5f0e8",
+        "accent": "#c9a96e",
+        "deepWater": "#131f38",
+        "undertow": "#1a2a4a",
+        "warmSand": "#d4c5a9",
+        "notes": "Abyss / Deep Water / Undertow grounds, Cream and Warm Sand text, Gold as accent only (hairlines, markers, CTA border). Never pure white or black. Mirrored in tokens.css."
+      },
+      "fonts": {
+        "display": "Playfair Display",
+        "body": "Inter",
+        "mono": "Inter",
+        "notes": "Vendored OFL woff2 in fonts/ (latin subset, variable weight). Playfair 600/700 for headings, Playfair 600 italic for quotes only, Inter 400/500/600 for body, labels, captions."
+      },
+      "cardCount": 12,
+      "cards": [
+        {
+          "id": "lbw-deep-surrender.t1.thesis",
+          "style": "lbw-deep-surrender",
+          "tier": "tier1",
+          "purpose": "thesis",
+          "file": "03-lbw-deep-surrender/cards/tier1/t1-thesis.html",
+          "slots": [
+            "eyebrow",
+            "headline",
+            "support"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 8
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.thesis.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.thesis.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t1.stat",
+          "style": "lbw-deep-surrender",
+          "tier": "tier1",
+          "purpose": "stat",
+          "file": "03-lbw-deep-surrender/cards/tier1/t1-stat.html",
+          "slots": [
+            "kicker",
+            "stat",
+            "label",
+            "source"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 8
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.stat.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.stat.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t1.section",
+          "style": "lbw-deep-surrender",
+          "tier": "tier1",
+          "purpose": "section",
+          "file": "03-lbw-deep-surrender/cards/tier1/t1-section.html",
+          "slots": [
+            "label",
+            "number",
+            "title",
+            "subtitle"
+          ],
+          "duration": {
+            "min": 4,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.section.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.section.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t1.quote",
+          "style": "lbw-deep-surrender",
+          "tier": "tier1",
+          "purpose": "quote",
+          "file": "03-lbw-deep-surrender/cards/tier1/t1-quote.html",
+          "slots": [
+            "quote",
+            "name",
+            "role"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 9
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.quote.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.quote.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t1.overview",
+          "style": "lbw-deep-surrender",
+          "tier": "tier1",
+          "purpose": "overview",
+          "file": "03-lbw-deep-surrender/cards/tier1/t1-overview.html",
+          "slots": [
+            "eyebrow",
+            "title",
+            "items"
+          ],
+          "duration": {
+            "min": 6,
+            "max": 10
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.overview.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t1.overview.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t2.lower-third",
+          "style": "lbw-deep-surrender",
+          "tier": "tier2",
+          "purpose": "lower-third",
+          "file": "03-lbw-deep-surrender/cards/tier2/t2-lower-third.html",
+          "slots": [
+            "name",
+            "role"
+          ],
+          "duration": {
+            "min": 4,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.lower-third.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.lower-third.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t2.label",
+          "style": "lbw-deep-surrender",
+          "tier": "tier2",
+          "purpose": "label",
+          "file": "03-lbw-deep-surrender/cards/tier2/t2-label.html",
+          "slots": [
+            "eyebrow",
+            "text"
+          ],
+          "duration": {
+            "min": 3,
+            "max": 5
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.label.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.label.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t2.list",
+          "style": "lbw-deep-surrender",
+          "tier": "tier2",
+          "purpose": "list",
+          "file": "03-lbw-deep-surrender/cards/tier2/t2-list.html",
+          "slots": [
+            "eyebrow",
+            "headline",
+            "items"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 12
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.list.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.list.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.t2.definition",
+          "style": "lbw-deep-surrender",
+          "tier": "tier2",
+          "purpose": "definition",
+          "file": "03-lbw-deep-surrender/cards/tier2/t2-definition.html",
+          "slots": [
+            "term",
+            "kind",
+            "definition"
+          ],
+          "duration": {
+            "min": 4,
+            "max": 8
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.definition.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.t2.definition.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.custom.breath-pacer",
+          "style": "lbw-deep-surrender",
+          "tier": "custom",
+          "purpose": "breath-pacer",
+          "file": "03-lbw-deep-surrender/cards/custom/c-breath-pacer.html",
+          "slots": [
+            "inhale",
+            "hold",
+            "exhale",
+            "cue"
+          ],
+          "duration": {
+            "min": 9,
+            "max": 120
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.custom.breath-pacer.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.custom.breath-pacer.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.custom.caption-box",
+          "style": "lbw-deep-surrender",
+          "tier": "custom",
+          "purpose": "caption-box",
+          "file": "03-lbw-deep-surrender/cards/custom/c-caption-box.html",
+          "slots": [
+            "text"
+          ],
+          "duration": {
+            "min": 1,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.custom.caption-box.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.custom.caption-box.png"
+          }
+        },
+        {
+          "id": "lbw-deep-surrender.custom.end-card",
+          "style": "lbw-deep-surrender",
+          "tier": "custom",
+          "purpose": "end-card",
+          "file": "03-lbw-deep-surrender/cards/custom/c-end-card.html",
+          "slots": [
+            "cta"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 10
+          },
+          "preview": {
+            "mp4": "03-lbw-deep-surrender/preview/lbw-deep-surrender.custom.end-card.mp4",
+            "poster": "03-lbw-deep-surrender/preview/lbw-deep-surrender.custom.end-card.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": "si-desert-authority",
+      "number": "04",
+      "name": "SI Desert Authority",
+      "status": "draft",
+      "folder": "04-si-desert-authority",
+      "inspiration": "Sonoran Intelligence brand system (Desert Authority) plus the live sonoranintel.com main.css: saguaro/sand sections, Barlow Condensed display, tracked eyebrows with a short leading rule, terracotta as a rare accent. Real logo mark from sonoranintel.com/images/sic-logo.png.",
+      "palette": {
+        "saguaro": "#2D3A2E",
+        "terracotta": "#C8682E",
+        "terracottaDeep": "#8F4A1E",
+        "sand": "#E8D5B7",
+        "bone": "#F5EDE0",
+        "mesquite": "#3D2E1F",
+        "adobe": "#8B6F47",
+        "bg": "#2D3A2E",
+        "fg": "#F5EDE0",
+        "accent": "#C8682E",
+        "notes": "Exactly six brand colors plus terracotta-deep. Never pure white or black. Terracotta surfaces carry bone text only (Ryan is red/green colorblind). Meaning is never encoded by hue alone. Mirrored in tokens.css."
+      },
+      "fonts": {
+        "display": "Barlow Condensed",
+        "body": "Barlow",
+        "mono": "Barlow",
+        "notes": "Matches live sonoranintel.com (Ryan ruling 2026-09-13). Vendored OFL woff2 in fonts/: Barlow Condensed 600/700, Barlow 400/500/600. Tabular numerals on every stat."
+      },
+      "cardCount": 13,
+      "cards": [
+        {
+          "id": "si-desert-authority.t1.thesis",
+          "style": "si-desert-authority",
+          "tier": "tier1",
+          "purpose": "thesis",
+          "file": "04-si-desert-authority/cards/tier1/t1-thesis.html",
+          "slots": [
+            "kicker",
+            "headline",
+            "sub"
+          ],
+          "duration": {
+            "min": 4.5,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t1.thesis.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t1.thesis.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t1.stat",
+          "style": "si-desert-authority",
+          "tier": "tier1",
+          "purpose": "stat",
+          "file": "04-si-desert-authority/cards/tier1/t1-stat.html",
+          "slots": [
+            "kicker",
+            "stat",
+            "label",
+            "source"
+          ],
+          "duration": {
+            "min": 4.5,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t1.stat.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t1.stat.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t1.section",
+          "style": "si-desert-authority",
+          "tier": "tier1",
+          "purpose": "section",
+          "file": "04-si-desert-authority/cards/tier1/t1-section.html",
+          "slots": [
+            "number",
+            "kicker",
+            "title"
+          ],
+          "duration": {
+            "min": 3.5,
+            "max": 5
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t1.section.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t1.section.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t1.quote",
+          "style": "si-desert-authority",
+          "tier": "tier1",
+          "purpose": "quote",
+          "file": "04-si-desert-authority/cards/tier1/t1-quote.html",
+          "slots": [
+            "source",
+            "quote",
+            "name",
+            "business"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 7
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t1.quote.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t1.quote.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t1.overview",
+          "style": "si-desert-authority",
+          "tier": "tier1",
+          "purpose": "overview",
+          "file": "04-si-desert-authority/cards/tier1/t1-overview.html",
+          "slots": [
+            "kicker",
+            "headline",
+            "steps"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 7
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t1.overview.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t1.overview.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t2.lower-third",
+          "style": "si-desert-authority",
+          "tier": "tier2",
+          "purpose": "lower-third",
+          "file": "04-si-desert-authority/cards/tier2/t2-lower-third.html",
+          "slots": [
+            "name",
+            "title"
+          ],
+          "duration": {
+            "min": 3.5,
+            "max": 5
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t2.lower-third.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t2.lower-third.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t2.label",
+          "style": "si-desert-authority",
+          "tier": "tier2",
+          "purpose": "label",
+          "file": "04-si-desert-authority/cards/tier2/t2-label.html",
+          "slots": [
+            "tag",
+            "text"
+          ],
+          "duration": {
+            "min": 3,
+            "max": 4.5
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t2.label.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t2.label.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t2.list",
+          "style": "si-desert-authority",
+          "tier": "tier2",
+          "purpose": "list",
+          "file": "04-si-desert-authority/cards/tier2/t2-list.html",
+          "slots": [
+            "kicker",
+            "headline",
+            "items"
+          ],
+          "duration": {
+            "min": 4,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t2.list.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t2.list.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.t2.definition",
+          "style": "si-desert-authority",
+          "tier": "tier2",
+          "purpose": "definition",
+          "file": "04-si-desert-authority/cards/tier2/t2-definition.html",
+          "slots": [
+            "term",
+            "part",
+            "definition"
+          ],
+          "duration": {
+            "min": 4,
+            "max": 6
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.t2.definition.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.t2.definition.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.custom.before-after",
+          "style": "si-desert-authority",
+          "tier": "custom",
+          "purpose": "before-after",
+          "file": "04-si-desert-authority/cards/custom/c-before-after.html",
+          "slots": [
+            "kicker",
+            "metric",
+            "beforeLabel",
+            "beforeValue",
+            "afterLabel",
+            "afterValue",
+            "note"
+          ],
+          "duration": {
+            "min": 5.5,
+            "max": 7.5
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.custom.before-after.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.custom.before-after.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.custom.score-gauge",
+          "style": "si-desert-authority",
+          "tier": "custom",
+          "purpose": "score-gauge",
+          "file": "04-si-desert-authority/cards/custom/c-score-gauge.html",
+          "slots": [
+            "kicker",
+            "business",
+            "score",
+            "grade",
+            "note"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 7
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.custom.score-gauge.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.custom.score-gauge.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.custom.ranking-climb",
+          "style": "si-desert-authority",
+          "tier": "custom",
+          "purpose": "ranking-climb",
+          "file": "04-si-desert-authority/cards/custom/c-ranking-climb.html",
+          "slots": [
+            "kicker",
+            "query",
+            "from",
+            "to",
+            "note",
+            "business",
+            "competitors"
+          ],
+          "duration": {
+            "min": 5.5,
+            "max": 7
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.custom.ranking-climb.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.custom.ranking-climb.png"
+          }
+        },
+        {
+          "id": "si-desert-authority.custom.end-card",
+          "style": "si-desert-authority",
+          "tier": "custom",
+          "purpose": "end-card",
+          "file": "04-si-desert-authority/cards/custom/c-end-card.html",
+          "slots": [
+            "tagline",
+            "cta"
+          ],
+          "duration": {
+            "min": 5,
+            "max": 10
+          },
+          "preview": {
+            "mp4": "04-si-desert-authority/preview/si-desert-authority.custom.end-card.mp4",
+            "poster": "04-si-desert-authority/preview/si-desert-authority.custom.end-card.png"
           }
         }
       ]

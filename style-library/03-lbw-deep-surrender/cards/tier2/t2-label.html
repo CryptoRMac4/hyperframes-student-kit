@@ -1,0 +1,65 @@
+<!doctype html>
+<!--
+  LBW DEEP SURRENDER · tier2 · label (name a technique, term, or moment)
+  TRANSPARENT: a compact frosted tag in the bottom-right band, opposite the
+  lower-third, with a gold hairline drawing across its top edge.
+  Slots: eyebrow, text.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #lbw-t2-label {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #lbw-t2-label .tag {
+        position: absolute; right: var(--safe-x); bottom: 112px;
+        padding: 28px 44px 30px; min-width: 260px; max-width: 760px;
+        background: var(--glass-bg); border: var(--glass-border); border-radius: var(--radius);
+        backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+        box-shadow: var(--glass-shadow);
+      }
+      #lbw-t2-label .topline {
+        position: absolute; left: 44px; right: 44px; top: 0; height: var(--hairline); background: var(--gold);
+      }
+      #lbw-t2-label .eyebrow {
+        font-weight: var(--wt-semi); font-size: 18px; letter-spacing: var(--track-eyebrow);
+        text-transform: uppercase; color: var(--warm-sand); white-space: nowrap;
+      }
+      #lbw-t2-label .text {
+        margin-top: 10px; font-family: var(--font-display); font-weight: var(--wt-bold);
+        font-size: 46px; line-height: 1.1; color: var(--cream); white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lbw-t2-label" data-composition-id="lbw-t2-label" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+      <div class="tag">
+        <div class="topline"></div>
+        <div class="eyebrow" data-slot="eyebrow">Technique</div>
+        <div class="text" data-slot="text">Box Breathing</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const R = "#lbw-t2-label ";
+      const D = parseFloat(document.getElementById("lbw-t2-label").dataset.duration) || 4;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(R + ".tag", { autoAlpha: 0, y: 20 },
+                { autoAlpha: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.1)
+        .fromTo(R + ".topline", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "sine.inOut" }, 0.35)
+        .fromTo(R + ".eyebrow", { autoAlpha: 0, y: 8 },
+                { autoAlpha: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.45)
+        .fromTo(R + ".text", { autoAlpha: 0, y: 10, filter: "blur(6px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "expo.out" }, 0.65)
+        .fromTo(R + ".text", { x: 0 }, { x: -5, duration: D - 1.6, ease: "sine.inOut", immediateRender: false }, 1.0)
+        .to(R + ".tag", { autoAlpha: 0, y: 10, duration: 0.6, ease: "sine.inOut" }, D - 0.6);
+      window.__timelines["lbw-t2-label"] = tl;
+    </script>
+  </body>
+</html>

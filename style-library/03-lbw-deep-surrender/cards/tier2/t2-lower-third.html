@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+  LBW DEEP SURRENDER · tier2 · lower-third (name + role)
+  TRANSPARENT: only the frosted Undertow panel paints. Bottom-left band, top
+  edge below y 830, so a centered or left-of-center speaker's face stays clear.
+  Slots: name, role.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #lbw-t2-lower-third {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #lbw-t2-lower-third .panel {
+        position: absolute; left: var(--safe-x); bottom: 112px;
+        display: flex; align-items: stretch; gap: 28px;
+        padding: 30px 52px 32px 36px; max-width: 980px;
+        background: var(--glass-bg); border: var(--glass-border); border-radius: var(--radius);
+        backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+        box-shadow: var(--glass-shadow);
+      }
+      #lbw-t2-lower-third .accent { width: var(--hairline); background: var(--gold); flex: none; }
+      #lbw-t2-lower-third .name {
+        font-family: var(--font-display); font-weight: var(--wt-bold);
+        font-size: var(--size-headline); line-height: 1.1; color: var(--cream); white-space: nowrap;
+      }
+      #lbw-t2-lower-third .role {
+        margin-top: 10px; font-weight: var(--wt-med); font-size: 26px;
+        letter-spacing: 0.01em; color: var(--warm-sand); white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lbw-t2-lower-third" data-composition-id="lbw-t2-lower-third" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="panel">
+        <div class="accent"></div>
+        <div class="text">
+          <div class="name" data-slot="name">Ryan McBurney</div>
+          <div class="role" data-slot="role">Founder, Liquid Breathwork</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const R = "#lbw-t2-lower-third ";
+      const D = parseFloat(document.getElementById("lbw-t2-lower-third").dataset.duration) || 5;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(R + ".panel", { autoAlpha: 0, y: 24 },
+                { autoAlpha: 1, y: 0, duration: 1.1, ease: "expo.out" }, 0.15)
+        .fromTo(R + ".accent", { scaleY: 0, transformOrigin: "50% 0%" },
+                { scaleY: 1, transformOrigin: "50% 0%", duration: 1.2, ease: "sine.inOut" }, 0.4)
+        .fromTo(R + ".name", { autoAlpha: 0, y: 10, filter: "blur(6px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "expo.out" }, 0.5)
+        .fromTo(R + ".role", { autoAlpha: 0, y: 8, filter: "blur(4px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "expo.out" }, 0.8)
+        // gentle hold drift so the overlay never reads as frozen
+        .fromTo(R + ".text", { x: 0 }, { x: 6, duration: D - 1.5, ease: "sine.inOut" }, 1.0)
+        .to(R + ".panel", { autoAlpha: 0, y: 12, duration: 0.7, ease: "sine.inOut" }, D - 0.7);
+      window.__timelines["lbw-t2-lower-third"] = tl;
+    </script>
+  </body>
+</html>

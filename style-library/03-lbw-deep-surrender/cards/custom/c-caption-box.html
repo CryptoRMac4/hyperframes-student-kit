@@ -1,0 +1,56 @@
+<!doctype html>
+<!--
+  LBW DEEP SURRENDER · custom · caption-box (locked lesson caption look)
+  TRANSPARENT: a Cream box with Abyss Inter Medium, top-center above the
+  speaker's head, two lines max. The one light surface in the pack, so text
+  flips to Abyss. Quicker than the rest of the pack on purpose: captions must
+  track speech. One caption phrase per instance.
+  Slots: text.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #lbw-custom-caption-box {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #lbw-custom-caption-box .band {
+        position: absolute; left: 0; top: 40px; width: 1920px;
+        display: flex; justify-content: center;
+      }
+      #lbw-custom-caption-box .cap {
+        max-width: 1100px; padding: 14px 36px 16px; box-sizing: border-box;
+        background: var(--cream); border-radius: var(--radius); box-shadow: var(--caption-shadow);
+        text-align: center;
+      }
+      #lbw-custom-caption-box .text {
+        margin: 0; font-weight: var(--wt-med); font-size: var(--size-caption); line-height: 1.3;
+        color: var(--abyss); text-wrap: balance;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lbw-custom-caption-box" data-composition-id="lbw-custom-caption-box" data-start="0" data-duration="3" data-width="1920" data-height="1080">
+      <div class="band">
+        <div class="cap">
+          <p class="text" data-slot="text">So today we are going to slow the breath down together.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const R = "#lbw-custom-caption-box ";
+      const D = parseFloat(document.getElementById("lbw-custom-caption-box").dataset.duration) || 3;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(R + ".cap", { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "sine.out" }, 0.05)
+        .fromTo(R + ".cap", { y: 0 }, { y: -3, duration: D - 0.8, ease: "sine.inOut", immediateRender: false }, 0.45)
+        .to(R + ".cap", { autoAlpha: 0, duration: 0.3, ease: "sine.in" }, D - 0.3);
+      window.__timelines["lbw-custom-caption-box"] = tl;
+    </script>
+  </body>
+</html>

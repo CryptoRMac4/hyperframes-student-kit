@@ -1,0 +1,75 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · tier2 · definition (transparent overlay)
+  Lower-band bone plate that defines one term in plain words. Term in saguaro
+  Barlow Condensed with one terracotta underline, part-of-speech tag in adobe,
+  two-line definition in mesquite.
+  Slots: term, part, definition.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #si-t2-definition {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #si-t2-definition .def {
+        position: absolute; left: 120px; bottom: 96px; width: 1160px; box-sizing: border-box;
+        padding: 34px 50px 40px; background: var(--bone-plate);
+        border: 1px solid var(--adobe-line); border-radius: var(--radius);
+      }
+      #si-t2-definition .head { display: flex; align-items: baseline; gap: 26px; }
+      #si-t2-definition .term {
+        --u: 1; padding-bottom: 8px; white-space: nowrap;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 70px; line-height: 1;
+        color: var(--saguaro);
+        background-image: linear-gradient(var(--terracotta), var(--terracotta));
+        background-repeat: no-repeat; background-position: 0 100%;
+        background-size: calc(var(--u) * 100%) var(--rule);
+      }
+      #si-t2-definition .part {
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 26px;
+        letter-spacing: 0.22em; text-transform: uppercase; color: var(--adobe); white-space: nowrap;
+      }
+      #si-t2-definition .body {
+        margin-top: 20px; max-width: 54ch; text-wrap: pretty;
+        font-size: 38px; font-weight: var(--wt-body); line-height: 1.35; color: var(--mesquite);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-t2-definition" data-composition-id="si-t2-definition" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="def">
+        <div class="head">
+          <div class="term" data-slot="term">Map Pack</div>
+          <div class="part" data-slot="part">noun</div>
+        </div>
+        <div class="body" data-slot="definition">The three businesses Google shows on the map, above every other result for a local search.</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-t2-definition");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s);
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".def"), { autoAlpha: 0, y: 48 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: IN }, 0.05)
+          .fromTo(q(".term"), { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: IN }, 0.3)
+          .fromTo(q(".term"), { "--u": 0 }, { "--u": 1, duration: 0.55, ease: WIPE }, 0.7)
+          .fromTo(q(".part"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, ease: IN }, 0.6)
+          .fromTo(q(".body"), { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: IN }, 0.8)
+          .to(q(".def"), { autoAlpha: 0, y: 40, duration: 0.45, ease: OUT }, 4.55);
+        window.__timelines["si-t2-definition"] = tl;
+      })();
+    </script>
+  </body>
+</html>

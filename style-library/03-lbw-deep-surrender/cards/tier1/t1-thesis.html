@@ -1,0 +1,87 @@
+<!doctype html>
+<!--
+  LBW DEEP SURRENDER · tier1 · thesis (full-screen takeover)
+  One idea, set in Playfair, surfacing from soft focus over the Deep Surrender
+  ground. A gold hairline draws open like an inhale. Opaque.
+  Slots: eyebrow, headline, support.
+  Timing: exit is placed from the root data-duration, so retiming only needs that attribute.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: var(--abyss); }
+      #lbw-t1-thesis {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: var(--abyss); color: var(--cream);
+        font-family: var(--font-body); overflow: hidden;
+      }
+      #lbw-t1-thesis .ground { position: absolute; inset: 0; background: var(--ground); }
+      #lbw-t1-thesis .light { position: absolute; width: 1500px; height: 1100px; border-radius: 50%; background: var(--depth-light); }
+      #lbw-t1-thesis .l1 { left: -260px; top: -300px; opacity: 0.9; }
+      #lbw-t1-thesis .l2 { left: 820px; top: 420px; opacity: 0.6; }
+      #lbw-t1-thesis .vignette { position: absolute; inset: 0; background: var(--vignette); }
+      #lbw-t1-thesis .grain { position: absolute; inset: 0; background: var(--tex-grain); background-size: 220px 220px; opacity: 0.05; mix-blend-mode: soft-light; }
+      #lbw-t1-thesis .content {
+        position: absolute; left: 0; top: 0; width: 1920px; height: 1080px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center;
+      }
+      #lbw-t1-thesis .eyebrow {
+        font-weight: var(--wt-semi); font-size: var(--size-label);
+        letter-spacing: var(--track-eyebrow); text-transform: uppercase;
+        color: var(--warm-sand); margin: 0 0 30px;
+      }
+      #lbw-t1-thesis .rule { width: 120px; height: var(--hairline); background: var(--gold); margin: 0 0 54px; }
+      #lbw-t1-thesis .headline {
+        margin: 0; max-width: 1440px;
+        font-family: var(--font-display); font-weight: var(--wt-bold);
+        font-size: var(--size-display); line-height: var(--lh-display);
+        color: var(--cream); text-wrap: balance;
+      }
+      #lbw-t1-thesis .support {
+        margin: 48px 0 0; max-width: 1100px;
+        font-weight: var(--wt-body); font-size: var(--size-body); line-height: var(--lh-body);
+        color: var(--warm-sand); text-wrap: balance;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lbw-t1-thesis" data-composition-id="lbw-t1-thesis" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="ground" data-layout-ignore></div>
+      <div class="light l1" data-layout-ignore></div>
+      <div class="light l2" data-layout-ignore></div>
+      <div class="vignette" data-layout-ignore></div>
+      <div class="grain" data-layout-ignore></div>
+      <div class="content">
+        <div class="eyebrow" data-slot="eyebrow">The core idea</div>
+        <div class="rule"></div>
+        <h1 class="headline" data-slot="headline">Your breath is the one system you can steer on purpose</h1>
+        <p class="support" data-slot="support">Change the pattern, and your nervous system follows.</p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const R = "#lbw-t1-thesis ";
+      const D = parseFloat(document.getElementById("lbw-t1-thesis").dataset.duration) || 6;
+      const tl = gsap.timeline({ paused: true });
+      // ambient: depth light drifts for the whole card, like slow water
+      tl.fromTo(R + ".l1", { x: 0, y: 0 }, { x: 140, y: 60, duration: D, ease: "sine.inOut" }, 0)
+        .fromTo(R + ".l2", { x: 0, y: 0 }, { x: -120, y: -50, duration: D, ease: "sine.inOut" }, 0)
+        // entrance: surface from soft focus, unhurried
+        .fromTo(R + ".eyebrow", { autoAlpha: 0, y: 12, filter: "blur(6px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "expo.out" }, 0.3)
+        .fromTo(R + ".rule", { scaleX: 0 }, { scaleX: 1, duration: 1.6, ease: "sine.inOut" }, 0.55)
+        .fromTo(R + ".headline", { autoAlpha: 0, y: 24, filter: "blur(10px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.8, ease: "expo.out" }, 0.8)
+        .fromTo(R + ".support", { autoAlpha: 0, y: 16, filter: "blur(6px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.4, ease: "expo.out" }, 1.7)
+        // exit: copy exhales away, the ground stays
+        .to(R + ".content", { autoAlpha: 0, y: -12, filter: "blur(6px)", duration: 0.8, ease: "sine.inOut" }, D - 0.8);
+      window.__timelines["lbw-t1-thesis"] = tl;
+    </script>
+  </body>
+</html>

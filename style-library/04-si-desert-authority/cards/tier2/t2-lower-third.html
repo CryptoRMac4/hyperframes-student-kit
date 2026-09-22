@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · tier2 · lower-third (transparent overlay)
+  Bottom-left, inside title safe, well below a centered speaker's face.
+  A terracotta bar rises first (the one marker), the saguaro plate slides out
+  from behind it, then name and role. Exits the way it came.
+  Slots: name, title.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #si-t2-lower-third {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #si-t2-lower-third .lt {
+        position: absolute; left: 120px; top: 814px; height: 156px; display: flex;
+      }
+      #si-t2-lower-third .bar { width: 10px; height: 156px; background: var(--terracotta); flex: none; }
+      #si-t2-lower-third .mask { overflow: hidden; height: 156px; }
+      #si-t2-lower-third .plate {
+        height: 156px; box-sizing: border-box; padding: 0 56px 0 36px;
+        display: flex; flex-direction: column; justify-content: center;
+        background: var(--saguaro-plate);
+      }
+      #si-t2-lower-third .name {
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 64px;
+        line-height: 1; letter-spacing: var(--track-display); color: var(--bone); white-space: nowrap;
+      }
+      #si-t2-lower-third .title {
+        margin-top: 12px; font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 28px;
+        letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-t2-lower-third" data-composition-id="si-t2-lower-third" data-start="0" data-duration="4.5" data-width="1920" data-height="1080">
+      <div class="lt">
+        <div class="bar"></div>
+        <div class="mask">
+          <div class="plate">
+            <div class="name" data-slot="name">Ryan McBurney</div>
+            <div class="title" data-slot="title">Founder, Sonoran Intelligence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-t2-lower-third");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s);
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".bar"), { scaleY: 0, transformOrigin: "center bottom" }, { scaleY: 1, duration: 0.4, ease: WIPE }, 0.05)
+          .fromTo(q(".plate"), { xPercent: -101 }, { xPercent: 0, duration: 0.65, ease: IN }, 0.35)
+          .fromTo(q(".name"), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: IN }, 0.6)
+          .fromTo(q(".title"), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: IN }, 0.72)
+          .to([q(".name"), q(".title")], { autoAlpha: 0, duration: 0.25, ease: OUT }, 3.75)
+          .to(q(".plate"), { xPercent: -101, duration: 0.4, ease: OUT }, 3.85)
+          .to(q(".bar"), { scaleY: 0, duration: 0.3, ease: OUT }, 4.2);
+        window.__timelines["si-t2-lower-third"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,194 @@
+{
+  "$schema": "../registry.schema.json",
+  "id": "lbw-deep-surrender",
+  "name": "LBW Deep Surrender",
+  "number": "03",
+  "status": "draft",
+  "inspiration": "Liquid Breathwork's own Deep Surrender web brand system (liquidbreathwork.com), translated to 1920x1080 video. Deep water at night: still, weighted, gold reserved for accents.",
+  "summary": "Calm, premium lesson and explainer cards for Liquid Breathwork videos. Use for course lessons, guided practices, and talking-head explainers where the tone must feel like a long exhale.",
+  "palette": {
+    "bg": "#0a1628",
+    "fg": "#f5f0e8",
+    "accent": "#c9a96e",
+    "deepWater": "#131f38",
+    "undertow": "#1a2a4a",
+    "warmSand": "#d4c5a9",
+    "notes": "Abyss / Deep Water / Undertow grounds, Cream and Warm Sand text, Gold as accent only (hairlines, markers, CTA border). Never pure white or black. Mirrored in tokens.css."
+  },
+  "fonts": {
+    "display": "Playfair Display",
+    "body": "Inter",
+    "mono": "Inter",
+    "notes": "Vendored OFL woff2 in fonts/ (latin subset, variable weight). Playfair 600/700 for headings, Playfair 600 italic for quotes only, Inter 400/500/600 for body, labels, captions."
+  },
+  "motion": "Breath-paced and calm. Copy surfaces with expo.out (opacity, 12 to 24px rise, soft blur clearing) over 1.2 to 1.8s; hairlines and the breath pacer use sine.inOut; exits are 0.6 to 0.8s sine.inOut fades. Tier1 grounds carry a slow drifting depth light. No back, elastic, bounce, or steps eases.",
+  "transitions": "Soft fade and rise in, fade and drift out. Frosted glass panels for overlays. Never ripples, droplets, wipes, or snaps.",
+  "cards": [
+    {
+      "id": "lbw-deep-surrender.t1.thesis",
+      "tier": "tier1",
+      "purpose": "thesis",
+      "file": "cards/tier1/t1-thesis.html",
+      "slots": [
+        { "name": "eyebrow", "type": "text", "maxChars": 28 },
+        { "name": "headline", "type": "text", "maxChars": 64, "note": "one idea; splits into 2 or 3 balanced lines" },
+        { "name": "support", "type": "text", "maxChars": 72, "note": "optional; leave empty to hide" }
+      ],
+      "duration": { "min": 5, "max": 8 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t1.thesis.mp4", "poster": "preview/lbw-deep-surrender.t1.thesis.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t1.stat",
+      "tier": "tier1",
+      "purpose": "stat",
+      "file": "cards/tier1/t1-stat.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 24 },
+        { "name": "stat", "type": "text", "maxChars": 6, "note": "figure or pattern, e.g. 4-4-6, 90%, 6" },
+        { "name": "label", "type": "text", "maxChars": 64 },
+        { "name": "source", "type": "text", "maxChars": 40 }
+      ],
+      "duration": { "min": 5, "max": 8 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t1.stat.mp4", "poster": "preview/lbw-deep-surrender.t1.stat.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t1.section",
+      "tier": "tier1",
+      "purpose": "section",
+      "file": "cards/tier1/t1-section.html",
+      "slots": [
+        { "name": "label", "type": "text", "maxChars": 14, "note": "e.g. Part, Module, Chapter" },
+        { "name": "number", "type": "text", "maxChars": 3 },
+        { "name": "title", "type": "text", "maxChars": 44 },
+        { "name": "subtitle", "type": "text", "maxChars": 72 }
+      ],
+      "duration": { "min": 4, "max": 6 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t1.section.mp4", "poster": "preview/lbw-deep-surrender.t1.section.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t1.quote",
+      "tier": "tier1",
+      "purpose": "quote",
+      "file": "cards/tier1/t1-quote.html",
+      "slots": [
+        { "name": "quote", "type": "text", "maxChars": 120, "note": "no surrounding quotation marks; the card draws one" },
+        { "name": "name", "type": "text", "maxChars": 32 },
+        { "name": "role", "type": "text", "maxChars": 48 }
+      ],
+      "duration": { "min": 5, "max": 9 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t1.quote.mp4", "poster": "preview/lbw-deep-surrender.t1.quote.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t1.overview",
+      "tier": "tier1",
+      "purpose": "overview",
+      "file": "cards/tier1/t1-overview.html",
+      "slots": [
+        { "name": "eyebrow", "type": "text", "maxChars": 24 },
+        { "name": "title", "type": "text", "maxChars": 24, "note": "stress-tested: 29 chars sets a lone word on the middle line" },
+        { "name": "items", "type": "list", "minItems": 3, "maxItems": 4, "maxChars": 36, "note": "one <li> per item; numbers are automatic; 38 chars wraps to two lines" }
+      ],
+      "duration": { "min": 6, "max": 10 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t1.overview.mp4", "poster": "preview/lbw-deep-surrender.t1.overview.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t2.lower-third",
+      "tier": "tier2",
+      "purpose": "lower-third",
+      "file": "cards/tier2/t2-lower-third.html",
+      "placement": "bottom-left band, top edge below y 830",
+      "slots": [
+        { "name": "name", "type": "text", "maxChars": 28 },
+        { "name": "role", "type": "text", "maxChars": 44 }
+      ],
+      "duration": { "min": 4, "max": 6 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t2.lower-third.mp4", "poster": "preview/lbw-deep-surrender.t2.lower-third.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t2.label",
+      "tier": "tier2",
+      "purpose": "label",
+      "file": "cards/tier2/t2-label.html",
+      "placement": "bottom-right band",
+      "slots": [
+        { "name": "eyebrow", "type": "text", "maxChars": 22 },
+        { "name": "text", "type": "text", "maxChars": 26 }
+      ],
+      "duration": { "min": 3, "max": 5 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t2.label.mp4", "poster": "preview/lbw-deep-surrender.t2.label.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t2.list",
+      "tier": "tier2",
+      "purpose": "list",
+      "file": "cards/tier2/t2-list.html",
+      "placement": "right column x 1176 to 1776; mirror .panel left if the speaker is framed right",
+      "slots": [
+        { "name": "eyebrow", "type": "text", "maxChars": 24 },
+        { "name": "headline", "type": "text", "maxChars": 36 },
+        { "name": "items", "type": "list", "minItems": 2, "maxItems": 4, "maxChars": 26, "note": "one <li> per item; reveal spacing adapts to data-duration; 29 chars can wrap to two lines" }
+      ],
+      "duration": { "min": 5, "max": 12 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t2.list.mp4", "poster": "preview/lbw-deep-surrender.t2.list.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.t2.definition",
+      "tier": "tier2",
+      "purpose": "definition",
+      "file": "cards/tier2/t2-definition.html",
+      "placement": "right column x 1176 to 1776",
+      "slots": [
+        { "name": "term", "type": "text", "maxChars": 18 },
+        { "name": "kind", "type": "text", "maxChars": 24, "note": "word class or pronunciation, e.g. noun" },
+        { "name": "definition", "type": "text", "maxChars": 120 }
+      ],
+      "duration": { "min": 4, "max": 8 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.t2.definition.mp4", "poster": "preview/lbw-deep-surrender.t2.definition.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.custom.breath-pacer",
+      "tier": "custom",
+      "purpose": "breath-pacer",
+      "file": "cards/custom/c-breath-pacer.html",
+      "knobs": {
+        "data-inhale": "seconds, default 4",
+        "data-hold": "seconds, default 4",
+        "data-exhale": "seconds, default 6",
+        "data-hold-out": "seconds held after the exhale, default 0 (skip)",
+        "data-cycles": "breaths, default 2",
+        "data-duration": "must equal 1.2 + cycles x (inhale + hold + exhale + hold-out) + 1.2; default 30.4"
+      },
+      "slots": [
+        { "name": "inhale", "type": "text", "maxChars": 12 },
+        { "name": "hold", "type": "text", "maxChars": 12 },
+        { "name": "exhale", "type": "text", "maxChars": 12 },
+        { "name": "cue", "type": "text", "maxChars": 48 }
+      ],
+      "duration": { "min": 9, "max": 120 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.custom.breath-pacer.mp4", "poster": "preview/lbw-deep-surrender.custom.breath-pacer.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.custom.caption-box",
+      "tier": "custom",
+      "purpose": "caption-box",
+      "file": "cards/custom/c-caption-box.html",
+      "placement": "top-center above the speaker's head, max 2 lines",
+      "slots": [
+        { "name": "text", "type": "text", "maxChars": 84, "note": "one spoken phrase; captions are sentence case" }
+      ],
+      "duration": { "min": 1, "max": 6 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.custom.caption-box.mp4", "poster": "preview/lbw-deep-surrender.custom.caption-box.png" }
+    },
+    {
+      "id": "lbw-deep-surrender.custom.end-card",
+      "tier": "custom",
+      "purpose": "end-card",
+      "file": "cards/custom/c-end-card.html",
+      "slots": [
+        { "name": "cta", "type": "text", "maxChars": 44 }
+      ],
+      "duration": { "min": 5, "max": 10 },
+      "preview": { "mp4": "preview/lbw-deep-surrender.custom.end-card.mp4", "poster": "preview/lbw-deep-surrender.custom.end-card.png" }
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "$schema": "../registry.schema.json",
+  "id": "si-desert-authority",
+  "name": "SI Desert Authority",
+  "number": "04",
+  "status": "draft",
+  "inspiration": "Sonoran Intelligence brand system (Desert Authority) plus the live sonoranintel.com main.css: saguaro/sand sections, Barlow Condensed display, tracked eyebrows with a short leading rule, terracotta as a rare accent. Real logo mark from sonoranintel.com/images/sic-logo.png.",
+  "summary": "Grounded, warm, quietly confident cards for Sonoran Intelligence videos aimed at local business owners: AI marketing explainers, audit walkthroughs, client results. Flat earth-tone surfaces, big condensed type, one terracotta marker per card, a hairline horizon with sun arcs as the recurring motif.",
+  "palette": {
+    "saguaro": "#2D3A2E",
+    "terracotta": "#C8682E",
+    "terracottaDeep": "#8F4A1E",
+    "sand": "#E8D5B7",
+    "bone": "#F5EDE0",
+    "mesquite": "#3D2E1F",
+    "adobe": "#8B6F47",
+    "bg": "#2D3A2E",
+    "fg": "#F5EDE0",
+    "accent": "#C8682E",
+    "notes": "Exactly six brand colors plus terracotta-deep. Never pure white or black. Terracotta surfaces carry bone text only (Ryan is red/green colorblind). Meaning is never encoded by hue alone. Mirrored in tokens.css."
+  },
+  "fonts": {
+    "display": "Barlow Condensed",
+    "body": "Barlow",
+    "mono": "Barlow",
+    "notes": "Matches live sonoranintel.com (Ryan ruling 2026-09-13). Vendored OFL woff2 in fonts/: Barlow Condensed 600/700, Barlow 400/500/600. Tabular numerals on every stat."
+  },
+  "motion": "Steady and confident. Firm ease-outs (power3.out entrances, power2.inOut rules and wipes, power2.in exits), count-ups on numbers, hairline strokes that draw in, a slow 6-8px drift during holds. No elastic, glitch, neon, or HUD.",
+  "transitions": "Clean slides, mask reveals, clip-path wipes, and a saguaro panel wipe on section markers. Exits reverse the entrance direction in 0.45s.",
+  "cards": [
+    {
+      "id": "si-desert-authority.t1.thesis",
+      "tier": "tier1",
+      "purpose": "thesis",
+      "file": "cards/tier1/t1-thesis.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 32 },
+        { "name": "headline", "type": "richtext", "maxChars": 60, "note": "Wrap the 1-3 word key phrase in <em> for the terracotta underline. Two balanced lines." },
+        { "name": "sub", "type": "text", "maxChars": 90 }
+      ],
+      "duration": { "min": 4.5, "max": 6 },
+      "preview": { "mp4": "preview/si-desert-authority.t1.thesis.mp4", "poster": "preview/si-desert-authority.t1.thesis.png" }
+    },
+    {
+      "id": "si-desert-authority.t1.stat",
+      "tier": "tier1",
+      "purpose": "stat",
+      "file": "cards/tier1/t1-stat.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 32 },
+        { "name": "stat", "type": "text", "maxChars": 7, "note": "prefix + number + suffix, e.g. 74%, $8,000, 3.4x. Counts up from 0." },
+        { "name": "label", "type": "text", "maxChars": 80 },
+        { "name": "source", "type": "text", "maxChars": 60, "note": "Default text is \"Source: add source\". Fill with a real, verifiable source or leave empty. Never invent one." }
+      ],
+      "duration": { "min": 4.5, "max": 6 },
+      "preview": { "mp4": "preview/si-desert-authority.t1.stat.mp4", "poster": "preview/si-desert-authority.t1.stat.png" }
+    },
+    {
+      "id": "si-desert-authority.t1.section",
+      "tier": "tier1",
+      "purpose": "section",
+      "file": "cards/tier1/t1-section.html",
+      "slots": [
+        { "name": "number", "type": "text", "maxChars": 2 },
+        { "name": "kicker", "type": "text", "maxChars": 24 },
+        { "name": "title", "type": "text", "maxChars": 36 }
+      ],
+      "duration": { "min": 3.5, "max": 5 },
+      "preview": { "mp4": "preview/si-desert-authority.t1.section.mp4", "poster": "preview/si-desert-authority.t1.section.png" }
+    },
+    {
+      "id": "si-desert-authority.t1.quote",
+      "tier": "tier1",
+      "purpose": "quote",
+      "file": "cards/tier1/t1-quote.html",
+      "slots": [
+        { "name": "source", "type": "text", "maxChars": 24, "note": "Where the real review came from, e.g. Google review. Default placeholder: Review source." },
+        { "name": "quote", "type": "text", "maxChars": 120, "note": "Real client words only, no quotation marks; the card draws one." },
+        { "name": "name", "type": "text", "maxChars": 28, "note": "Client Name, Business" },
+        { "name": "business", "type": "text", "maxChars": 44, "note": "City, AZ" }
+      ],
+      "duration": { "min": 5, "max": 7 },
+      "preview": { "mp4": "preview/si-desert-authority.t1.quote.mp4", "poster": "preview/si-desert-authority.t1.quote.png" }
+    },
+    {
+      "id": "si-desert-authority.t1.overview",
+      "tier": "tier1",
+      "purpose": "overview",
+      "file": "cards/tier1/t1-overview.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 32 },
+        { "name": "headline", "type": "text", "maxChars": 48 },
+        { "name": "steps", "type": "list", "minItems": 3, "maxItems": 4, "maxChars": 60, "note": "Each <li> holds <span class=\"t\">title, max 16 chars</span><span class=\"d\">detail, max 44 chars, two even lines</span>. Numbers are automatic." }
+      ],
+      "duration": { "min": 5, "max": 7 },
+      "preview": { "mp4": "preview/si-desert-authority.t1.overview.mp4", "poster": "preview/si-desert-authority.t1.overview.png" }
+    },
+    {
+      "id": "si-desert-authority.t2.lower-third",
+      "tier": "tier2",
+      "purpose": "lower-third",
+      "file": "cards/tier2/t2-lower-third.html",
+      "slots": [
+        { "name": "name", "type": "text", "maxChars": 26 },
+        { "name": "title", "type": "text", "maxChars": 36 }
+      ],
+      "duration": { "min": 3.5, "max": 5 },
+      "preview": { "mp4": "preview/si-desert-authority.t2.lower-third.mp4", "poster": "preview/si-desert-authority.t2.lower-third.png" }
+    },
+    {
+      "id": "si-desert-authority.t2.label",
+      "tier": "tier2",
+      "purpose": "label",
+      "file": "cards/tier2/t2-label.html",
+      "slots": [
+        { "name": "tag", "type": "text", "maxChars": 24 },
+        { "name": "text", "type": "text", "maxChars": 30 }
+      ],
+      "duration": { "min": 3, "max": 4.5 },
+      "preview": { "mp4": "preview/si-desert-authority.t2.label.mp4", "poster": "preview/si-desert-authority.t2.label.png" }
+    },
+    {
+      "id": "si-desert-authority.t2.list",
+      "tier": "tier2",
+      "purpose": "list",
+      "file": "cards/tier2/t2-list.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 28 },
+        { "name": "headline", "type": "text", "maxChars": 34 },
+        { "name": "items", "type": "list", "minItems": 2, "maxItems": 4, "maxChars": 28, "note": "one line each at 28 chars; longer items wrap and risk orphans" }
+      ],
+      "duration": { "min": 4, "max": 6 },
+      "preview": { "mp4": "preview/si-desert-authority.t2.list.mp4", "poster": "preview/si-desert-authority.t2.list.png" }
+    },
+    {
+      "id": "si-desert-authority.t2.definition",
+      "tier": "tier2",
+      "purpose": "definition",
+      "file": "cards/tier2/t2-definition.html",
+      "slots": [
+        { "name": "term", "type": "text", "maxChars": 26 },
+        { "name": "part", "type": "text", "maxChars": 14 },
+        { "name": "definition", "type": "text", "maxChars": 100 }
+      ],
+      "duration": { "min": 4, "max": 6 },
+      "preview": { "mp4": "preview/si-desert-authority.t2.definition.mp4", "poster": "preview/si-desert-authority.t2.definition.png" }
+    },
+    {
+      "id": "si-desert-authority.custom.before-after",
+      "tier": "custom",
+      "purpose": "before-after",
+      "file": "cards/custom/c-before-after.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 32 },
+        { "name": "metric", "type": "text", "maxChars": 34 },
+        { "name": "beforeLabel", "type": "text", "maxChars": 14 },
+        { "name": "beforeValue", "type": "text", "maxChars": 5, "note": "number with optional prefix/suffix; counts up" },
+        { "name": "afterLabel", "type": "text", "maxChars": 16 },
+        { "name": "afterValue", "type": "text", "maxChars": 5, "note": "number with optional prefix/suffix; counts up" },
+        { "name": "note", "type": "text", "maxChars": 80 }
+      ],
+      "duration": { "min": 5.5, "max": 7.5 },
+      "preview": { "mp4": "preview/si-desert-authority.custom.before-after.mp4", "poster": "preview/si-desert-authority.custom.before-after.png" }
+    },
+    {
+      "id": "si-desert-authority.custom.score-gauge",
+      "tier": "custom",
+      "purpose": "score-gauge",
+      "file": "cards/custom/c-score-gauge.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 28 },
+        { "name": "business", "type": "text", "maxChars": 28 },
+        { "name": "score", "type": "text", "maxChars": 3, "note": "integer 0-100" },
+        { "name": "grade", "type": "text", "maxChars": 14, "note": "words, e.g. Needs work / Solid / Strong" },
+        { "name": "note", "type": "text", "maxChars": 70 }
+      ],
+      "duration": { "min": 5, "max": 7 },
+      "preview": { "mp4": "preview/si-desert-authority.custom.score-gauge.mp4", "poster": "preview/si-desert-authority.custom.score-gauge.png" }
+    },
+    {
+      "id": "si-desert-authority.custom.ranking-climb",
+      "tier": "custom",
+      "purpose": "ranking-climb",
+      "file": "cards/custom/c-ranking-climb.html",
+      "slots": [
+        { "name": "kicker", "type": "text", "maxChars": 28 },
+        { "name": "query", "type": "text", "maxChars": 24, "note": "include the curly quotes" },
+        { "name": "from", "type": "text", "maxChars": 1, "note": "starting rank 2-5" },
+        { "name": "to", "type": "text", "maxChars": 1, "note": "target rank 1-4, less than from" },
+        { "name": "note", "type": "text", "maxChars": 64 },
+        { "name": "business", "type": "text", "maxChars": 24 },
+        { "name": "competitors", "type": "list", "minItems": 4, "maxItems": 4, "maxChars": 24 }
+      ],
+      "duration": { "min": 5.5, "max": 7 },
+      "preview": { "mp4": "preview/si-desert-authority.custom.ranking-climb.mp4", "poster": "preview/si-desert-authority.custom.ranking-climb.png" }
+    },
+    {
+      "id": "si-desert-authority.custom.end-card",
+      "tier": "custom",
+      "purpose": "end-card",
+      "file": "cards/custom/c-end-card.html",
+      "slots": [
+        { "name": "tagline", "type": "text", "maxChars": 44 },
+        { "name": "cta", "type": "text", "maxChars": 42 }
+      ],
+      "duration": { "min": 5, "max": 10 },
+      "preview": { "mp4": "preview/si-desert-authority.custom.end-card.mp4", "poster": "preview/si-desert-authority.custom.end-card.png" }
+    }
+  ]
+}

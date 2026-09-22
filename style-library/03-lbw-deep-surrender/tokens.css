@@ -1,0 +1,122 @@
+/* ============================================================================
+   LBW DEEP SURRENDER · style tokens
+   Single source of palette / type / motion / surface for every card in this
+   style. Cards reference these vars and never hardcode colors, fonts, or eases.
+   Brand source: Liquid Breathwork "Deep Surrender" system. See DESIGN.md.
+   ============================================================================ */
+
+/* Type. Vendored OFL woff2 (latin subset, variable weight) so renders never
+   touch a font CDN. Paths are relative to this file, so they resolve from any
+   card that links ../../tokens.css. */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+  src: url("fonts/playfair-display-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: block;
+  src: url("fonts/playfair-display-italic-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("fonts/inter-latin.woff2") format("woff2");
+}
+
+:root {
+  /* --- palette: Deep Surrender. Never pure white, never pure black. -------- */
+  --abyss:      #0a1628;   /* primary dark ground */
+  --deep-water: #131f38;   /* secondary ground, gradient midpoint */
+  --undertow:   #1a2a4a;   /* glass panels, 60-80% */
+  --cream:      #f5f0e8;   /* primary text on dark, caption box fill */
+  --warm-sand:  #d4c5a9;   /* secondary text, wordmark, eyebrows */
+  --gold:       #c9a96e;   /* SACRED: hairlines, markers, CTA border only */
+
+  /* opacity ramps (use these, never invent mixed colors) */
+  --cream-80: rgba(245, 240, 232, 0.80);
+  --cream-60: rgba(245, 240, 232, 0.60);
+  --cream-12: rgba(245, 240, 232, 0.12);
+  --gold-40:  rgba(201, 169, 110, 0.40);
+  --gold-20:  rgba(201, 169, 110, 0.20);
+  --gold-10:  rgba(201, 169, 110, 0.10);
+  --undertow-72: rgba(26, 42, 74, 0.72);
+  --abyss-60:    rgba(10, 22, 40, 0.60);
+
+  /* semantic aliases the blueprint contract expects */
+  --bg:     var(--abyss);
+  --fg:     var(--cream);
+  --accent: var(--gold);
+  --muted:  var(--warm-sand);
+
+  /* the takeover ground: the site's 135deg body gradient */
+  --ground: linear-gradient(135deg, #0a1628 0%, #131f38 50%, #0a1628 100%);
+  /* soft depth light that drifts behind tier1 copy (never a ripple) */
+  --depth-light: radial-gradient(closest-side, rgba(26, 42, 74, 0.95), rgba(26, 42, 74, 0));
+  --vignette: radial-gradient(120% 95% at 50% 45%, rgba(10, 22, 40, 0) 55%, rgba(10, 22, 40, 0.75) 100%);
+  /* fine fixed-seed grain, low opacity: stops gradient banding in H.264 */
+  --tex-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* --- typography ---------------------------------------------------------- */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:    "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    var(--font-body);   /* contract alias; this style has no mono */
+
+  --wt-body:  400;
+  --wt-med:   500;
+  --wt-semi:  600;
+  --wt-bold:  700;
+
+  /* video scale for 1920x1080 (readable from a phone at arm's length) */
+  --size-mega:     280px;   /* stat numeral */
+  --size-display:  104px;   /* thesis headline */
+  --size-title:    84px;    /* section / end-card titles */
+  --size-quote:    68px;    /* pull quote */
+  --size-headline: 52px;    /* tier2 headline, term, name */
+  --size-body:     34px;    /* supporting copy, list items */
+  --size-caption:  44px;    /* burned-in lesson captions */
+  --size-label:    22px;    /* eyebrows (uppercase, tracked) */
+  --size-tiny:     18px;    /* source lines */
+
+  --lh-display: 1.14;
+  --lh-body:    1.45;
+  --track-eyebrow: 0.22em;
+  --track-wordmark: 0.05em;
+
+  /* --- motion: breath-paced. Soft in, long settle, nothing bounces. -------- */
+  --ease-in:  cubic-bezier(0.37, 0, 0.63, 1);    /* sine.inOut */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);     /* expo.out */
+  --ease-snap: var(--ease-out);                   /* contract alias */
+  --gsap-reveal: expo.out;      /* copy surfacing */
+  --gsap-breath: sine.inOut;    /* anything that inhales or exhales */
+  --gsap-settle: sine.out;      /* hairlines, fades */
+  --dur-in:  1.2s;
+  --dur-out: 0.8s;
+  --rise: 24px;                 /* entrance travel */
+  --blur-in: 10px;              /* copy surfaces from soft focus */
+
+  /* --- surfaces ------------------------------------------------------------ */
+  --radius: 8px;
+  --radius-sm: 4px;
+  --pad: 48px;
+  --glass-bg: var(--undertow-72);
+  --glass-border: 1px solid var(--gold-20);
+  --glass-blur: blur(14px) saturate(1.05);
+  --glass-shadow: 0 18px 48px rgba(10, 22, 40, 0.35);
+  --hairline: 2px;
+  --caption-shadow: 0 10px 30px rgba(10, 22, 40, 0.28);
+
+  /* breath pacer orb: Undertow body lit faintly from above with Warm Sand */
+  --orb-fill: radial-gradient(circle at 50% 38%, rgba(212, 197, 169, 0.16) 0%, rgba(26, 42, 74, 0.96) 48%, rgba(19, 31, 56, 0.96) 100%);
+  --orb-glow: 0 0 140px rgba(26, 42, 74, 0.9), inset 0 0 80px rgba(10, 22, 40, 0.45);
+
+  /* --- safe zones (1920x1080) ---------------------------------------------- */
+  --safe-x: 144px;    /* title-safe side margin (7.5%) */
+  --safe-y: 96px;     /* title-safe top/bottom margin (~9%) */
+}

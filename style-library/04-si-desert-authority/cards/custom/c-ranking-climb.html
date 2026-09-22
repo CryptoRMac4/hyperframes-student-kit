@@ -1,0 +1,143 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · custom · ranking-climb (opaque takeover)
+  A local results list on sand. The client row (saguaro plate, bold bone name,
+  YOU tag, terracotta edge bar) starts at `from` and climbs to `to` while the
+  rows it passes step down one place. The client is marked by fill luminance,
+  weight, the YOU tag, and position, never by hue alone.
+  Rows are built once from the slots at load (deterministic).
+  Slots: kicker, query, from, to, note, business, competitors (list of 4 <li>).
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: var(--sand); }
+      #si-c-ranking-climb {
+        position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden;
+        background: var(--sand); color: var(--mesquite); font-family: var(--font-body);
+      }
+      #si-c-ranking-climb .left {
+        position: absolute; left: 180px; top: 0; width: 640px; height: 1080px;
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      #si-c-ranking-climb .kicker {
+        display: flex; align-items: center; gap: 22px;
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 28px;
+        letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--adobe);
+      }
+      #si-c-ranking-climb .kicker .dash { width: 56px; height: 3px; background: var(--adobe); flex: none; }
+      #si-c-ranking-climb .query {
+        margin-top: 22px; text-wrap: balance;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 100px;
+        line-height: 1.0; letter-spacing: var(--track-display); color: var(--mesquite);
+      }
+      #si-c-ranking-climb .move {
+        margin-top: 30px; font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 52px;
+        color: var(--saguaro); font-variant-numeric: tabular-nums lining-nums;
+      }
+      #si-c-ranking-climb .note {
+        margin-top: 22px; max-width: 26ch; text-wrap: balance;
+        font-size: 36px; line-height: 1.38; color: var(--mesquite-dim);
+      }
+      #si-c-ranking-climb .board { position: absolute; left: 900px; top: 170px; width: 840px; height: 740px; }
+      #si-c-ranking-climb .rank {
+        position: absolute; left: 0; width: 70px; height: 128px;
+        display: flex; align-items: center;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 56px;
+        color: var(--adobe); font-variant-numeric: tabular-nums lining-nums;
+      }
+      #si-c-ranking-climb .row {
+        position: absolute; left: 90px; width: 750px; height: 128px; box-sizing: border-box;
+        display: flex; align-items: center; padding: 0 36px 0 40px; overflow: hidden;
+        background: var(--bone); border: 1px solid var(--adobe-line); border-radius: var(--radius);
+        font-size: 40px; font-weight: var(--wt-medium); color: var(--mesquite); white-space: nowrap;
+      }
+      #si-c-ranking-climb .row.you {
+        z-index: 2; background: var(--saguaro); border-color: var(--saguaro);
+        color: var(--bone); font-weight: var(--wt-semi);
+      }
+      #si-c-ranking-climb .row.you .edge {
+        position: absolute; left: 0; top: 0; width: 12px; height: 128px; background: var(--terracotta);
+      }
+      #si-c-ranking-climb .row.you .tag {
+        margin-left: auto; padding: 4px 14px 6px; border: 2px solid var(--bone); border-radius: 4px;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 26px;
+        letter-spacing: 0.2em; color: var(--bone);
+      }
+      #si-c-ranking-climb .pool { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="si-c-ranking-climb" data-composition-id="si-c-ranking-climb" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="left">
+        <div class="kicker"><span class="dash"></span><span data-slot="kicker">Google Maps, City AZ</span></div>
+        <div class="query" data-slot="query">&ldquo;roofer near me&rdquo;</div>
+        <div class="move">From #<span data-slot="from">5</span> to #<span data-slot="to">1</span></div>
+        <div class="note" data-slot="note">Eight weeks of reviews, photos, and a cleaned-up profile.</div>
+      </div>
+      <div class="board">
+        <div class="row you"><span class="edge"></span><span data-slot="business">Your Business</span><span class="tag">You</span></div>
+      </div>
+      <ul class="pool" data-slot="competitors">
+        <li>Competitor A</li>
+        <li>Competitor B</li>
+        <li>Competitor C</li>
+        <li>Competitor D</li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-c-ranking-climb");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s), qa = (s) => root.querySelectorAll(s);
+
+        const PITCH = 152, SLOTS = 5;
+        const clamp = (n) => Math.max(1, Math.min(SLOTS, parseInt(n, 10) || 1));
+        const from = clamp(q('[data-slot="from"]').textContent);
+        const to = Math.min(from, clamp(q('[data-slot="to"]').textContent));
+        const board = q(".board"), you = q(".row.you");
+        const names = Array.from(qa('[data-slot="competitors"] li')).map((li) => li.textContent.trim()).slice(0, SLOTS - 1);
+
+        // Static rank gutter 1..5.
+        for (let i = 0; i < SLOTS; i++) {
+          const r = document.createElement("div");
+          r.className = "rank"; r.style.top = i * PITCH + "px"; r.textContent = String(i + 1);
+          board.appendChild(r);
+        }
+        // Competitor rows fill every slot except the client's starting slot.
+        const rows = [];
+        let n = 0;
+        for (let slot = 1; slot <= SLOTS; slot++) {
+          if (slot === from) continue;
+          const row = document.createElement("div");
+          row.className = "row"; row.style.top = (slot - 1) * PITCH + "px";
+          row.textContent = names[n++] || "";
+          board.appendChild(row);
+          rows.push({ el: row, slot });
+        }
+        you.style.top = (from - 1) * PITCH + "px";
+        const passed = rows.filter((r) => r.slot >= to && r.slot < from).map((r) => r.el);
+        const ordered = Array.from(qa(".row")).sort((a, b) => parseFloat(a.style.top) - parseFloat(b.style.top));
+
+        const CLIMB = 2.2, DUR = 1.3;
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".kicker"), { autoAlpha: 0, x: -30 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: IN }, 0.1)
+          .fromTo(q(".query"), { autoAlpha: 0, y: 36 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: IN }, 0.2)
+          .fromTo(qa(".rank"), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, ease: IN, stagger: 0.06 }, 0.4)
+          .fromTo(ordered, { autoAlpha: 0, x: 40 }, { autoAlpha: 1, x: 0, duration: 0.55, ease: IN, stagger: 0.08 }, 0.45)
+          .fromTo(you, { y: 0 }, { y: -(from - to) * PITCH, duration: DUR, ease: "power3.inOut" }, CLIMB);
+        if (passed.length) tl.fromTo(passed, { y: 0 }, { y: PITCH, duration: DUR, ease: "power3.inOut" }, CLIMB);
+        tl.fromTo(q(".move"), { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: IN }, CLIMB + DUR - 0.2)
+          .fromTo(q(".note"), { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: IN }, CLIMB + DUR)
+          .to([q(".left"), board], { autoAlpha: 0, y: -40, duration: 0.45, ease: OUT, stagger: 0.03 }, 5.52);
+        window.__timelines["si-c-ranking-climb"] = tl;
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<!--
+  LBW DEEP SURRENDER · custom · breath-pacer (guided breathing takeover)
+  An Undertow orb grows on the inhale, rests on the hold, and settles on the
+  exhale, always on sine.inOut. The phase is named in words and counted, and a
+  thin gold arc travels once around the guide ring per breath, so meaning never
+  depends on color. Opaque.
+  Knobs (seconds, on the root): data-inhale, data-hold, data-exhale, data-hold-out
+  (hold after exhale, 0 to skip), data-cycles. Default 4-4-6, 2 cycles.
+  The script writes the resulting length back to data-duration
+  (1.2s intro + cycles x breath + 1.2s outro). Keep the static attribute in sync
+  when changing knobs so tools that read it before the script runs agree.
+  Slots: inhale, hold, exhale (phase words), cue.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: var(--abyss); }
+      #lbw-custom-breath-pacer {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: var(--abyss); color: var(--cream);
+        font-family: var(--font-body); overflow: hidden;
+      }
+      #lbw-custom-breath-pacer .ground { position: absolute; inset: 0; background: var(--ground); }
+      #lbw-custom-breath-pacer .light { position: absolute; width: 1500px; height: 1100px; border-radius: 50%; background: var(--depth-light); }
+      #lbw-custom-breath-pacer .l1 { left: -300px; top: -380px; opacity: 0.8; }
+      #lbw-custom-breath-pacer .l2 { left: 760px; top: 480px; opacity: 0.5; }
+      #lbw-custom-breath-pacer .vignette { position: absolute; inset: 0; background: var(--vignette); }
+      #lbw-custom-breath-pacer .grain { position: absolute; inset: 0; background: var(--tex-grain); background-size: 220px 220px; opacity: 0.05; mix-blend-mode: soft-light; }
+      #lbw-custom-breath-pacer .stage { position: absolute; left: 610px; top: 130px; width: 700px; height: 700px; }
+      #lbw-custom-breath-pacer .guide {
+        position: absolute; left: 0; top: 0; width: 700px; height: 700px; box-sizing: border-box;
+        border-radius: 50%; border: 1px solid var(--cream-12);
+      }
+      #lbw-custom-breath-pacer svg.progress { position: absolute; left: 0; top: 0; width: 700px; height: 700px; rotate: -90deg; }
+      #lbw-custom-breath-pacer .orb {
+        position: absolute; left: 30px; top: 30px; width: 640px; height: 640px; box-sizing: border-box;
+        border-radius: 50%; background: var(--orb-fill); border: 1px solid var(--gold-20); box-shadow: var(--orb-glow);
+      }
+      #lbw-custom-breath-pacer .center {
+        position: absolute; left: 0; top: 0; width: 700px; height: 700px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+      }
+      #lbw-custom-breath-pacer .phases { position: relative; width: 440px; height: 34px; }
+      #lbw-custom-breath-pacer .phase {
+        position: absolute; left: 0; top: 0; width: 440px; text-align: center; opacity: 0; visibility: hidden;
+        font-weight: var(--wt-semi); font-size: 26px; line-height: 34px;
+        letter-spacing: var(--track-eyebrow); text-transform: uppercase; color: var(--warm-sand);
+      }
+      #lbw-custom-breath-pacer .count { position: relative; width: 300px; height: 140px; margin-top: 10px; }
+      #lbw-custom-breath-pacer .count span {
+        position: absolute; left: 0; top: 0; width: 300px; text-align: center; opacity: 0; visibility: hidden;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 120px; line-height: 140px;
+        font-variant-numeric: lining-nums tabular-nums; color: var(--cream);
+      }
+      #lbw-custom-breath-pacer .cue {
+        position: absolute; left: 0; top: 900px; width: 1920px; text-align: center;
+        font-weight: var(--wt-body); font-size: var(--size-body); color: var(--warm-sand);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lbw-custom-breath-pacer" data-composition-id="lbw-custom-breath-pacer" data-start="0" data-duration="30.4" data-width="1920" data-height="1080"
+         data-inhale="4" data-hold="4" data-exhale="6" data-hold-out="0" data-cycles="2">
+      <div class="ground" data-layout-ignore></div>
+      <div class="light l1" data-layout-ignore></div>
+      <div class="light l2" data-layout-ignore></div>
+      <div class="vignette" data-layout-ignore></div>
+      <div class="grain" data-layout-ignore></div>
+      <div class="stage">
+        <div class="guide"></div>
+        <svg class="progress" viewBox="0 0 700 700" aria-hidden="true">
+          <circle cx="350" cy="350" r="349" fill="none" stroke="var(--gold)" stroke-width="2" />
+        </svg>
+        <div class="orb"></div>
+        <div class="center">
+          <div class="phases">
+            <div class="phase ph-in" data-slot="inhale">Inhale</div>
+            <div class="phase ph-hold" data-slot="hold">Hold</div>
+            <div class="phase ph-out" data-slot="exhale">Exhale</div>
+          </div>
+          <div class="count" data-layout-allow-overlap></div>
+        </div>
+      </div>
+      <div class="cue" data-slot="cue">Follow the circle</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const ID = "lbw-custom-breath-pacer", R = "#" + ID + " ";
+      const ROOT = document.getElementById(ID);
+      const knob = (k, d) => { const v = parseFloat(ROOT.dataset[k]); return Number.isFinite(v) && v >= 0 ? v : d; };
+      const IN = knob("inhale", 4), HOLD = knob("hold", 4), OUT = knob("exhale", 6), HOLD_OUT = knob("holdOut", 0);
+      const CYCLES = Math.max(1, Math.round(knob("cycles", 2)));
+      const INTRO = 1.2, OUTRO = 1.2, BREATH = IN + HOLD + OUT + HOLD_OUT;
+      const D = INTRO + CYCLES * BREATH + OUTRO;
+      ROOT.dataset.duration = String(D);
+
+      const REST = 0.46;                       // orb scale at empty lungs
+      const C = 2 * Math.PI * 349;             // guide ring circumference
+      const arc = ROOT.querySelector("svg.progress circle");
+      arc.style.strokeDasharray = C + " " + C;
+      arc.style.strokeDashoffset = C;
+      const countBox = ROOT.querySelector(".count");
+      const orb = ROOT.querySelector(".orb");
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(R + ".l1", { x: 0, y: 0 }, { x: 160, y: 80, duration: D, ease: "sine.inOut" }, 0)
+        .fromTo(R + ".l2", { x: 0, y: 0 }, { x: -140, y: -60, duration: D, ease: "sine.inOut" }, 0)
+        .fromTo(R + ".guide", { autoAlpha: 0 }, { autoAlpha: 1, duration: INTRO, ease: "sine.out" }, 0)
+        .fromTo(orb, { autoAlpha: 0, scale: REST * 0.92 }, { autoAlpha: 1, scale: REST, duration: INTRO, ease: "sine.out" }, 0)
+        .fromTo(R + ".cue", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: "expo.out" }, 0.2);
+
+      // one phase: name crossfades in and out, numerals count whole seconds
+      function phase(sel, start, len) {
+        if (len <= 0) return;
+        const el = ROOT.querySelector(sel);
+        tl.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, ease: "sine.out", immediateRender: false }, start);
+        tl.fromTo(el, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.35, ease: "sine.in", immediateRender: false }, start + len - 0.35);
+        const whole = Math.ceil(len - 0.001);
+        for (let k = 1; k <= whole; k++) {
+          const span = document.createElement("span");
+          span.textContent = String(k);
+          countBox.appendChild(span);
+          // crossfade centered on each second boundary so the count never blinks empty
+          const on = Math.max(0, start + k - 1 - 0.12), off = Math.min(start + k, start + len) - 0.12;
+          tl.fromTo(span, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.24, ease: "sine.inOut", immediateRender: false }, on);
+          tl.fromTo(span, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.24, ease: "sine.inOut", immediateRender: false }, off);
+        }
+      }
+
+      for (let c = 0; c < CYCLES; c++) {
+        const t0 = INTRO + c * BREATH;
+        // inhale: orb grows, arc draws halfway round the ring's pattern
+        phase(".ph-in", t0, IN);
+        tl.fromTo(orb, { scale: REST }, { scale: 1, duration: IN, ease: "sine.inOut", immediateRender: false }, t0);
+        tl.fromTo(arc, { strokeDashoffset: C }, { strokeDashoffset: 0, duration: IN, ease: "sine.inOut", immediateRender: false }, t0);
+        // hold: everything rests
+        phase(".ph-hold", t0 + IN, HOLD);
+        // exhale: orb settles, arc unwinds forward until the ring is empty again
+        phase(".ph-out", t0 + IN + HOLD, OUT);
+        tl.fromTo(orb, { scale: 1 }, { scale: REST, duration: OUT, ease: "sine.inOut", immediateRender: false }, t0 + IN + HOLD);
+        tl.fromTo(arc, { strokeDashoffset: 0 }, { strokeDashoffset: -C, duration: OUT, ease: "sine.inOut", immediateRender: false }, t0 + IN + HOLD);
+        phase(".ph-hold", t0 + IN + HOLD + OUT, HOLD_OUT);
+      }
+
+      tl.to([R + ".stage", R + ".cue"], { autoAlpha: 0, duration: OUTRO - 0.2, ease: "sine.inOut" }, D - OUTRO);
+      window.__timelines[ID] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+  SI DESERT AUTHORITY · tier2 · list (transparent overlay)
+  Right-third saguaro panel; Ryan frames himself left of center, so the right side stays clear of his face. Panel wipes down,
+  headline + one terracotta rule, then 2-4 items land one at a time, each with
+  a sand check drawn in CSS.
+  Slots: kicker, headline, items (list, 2-4 <li>).
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #si-t2-list {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #si-t2-list .panel {
+        position: absolute; right: 120px; top: 200px; width: 620px; box-sizing: border-box;
+        padding: 50px 56px 58px; background: var(--saguaro-plate); border-radius: var(--radius);
+      }
+      #si-t2-list .kicker {
+        font-family: var(--font-display); font-weight: var(--wt-semi); font-size: 24px;
+        letter-spacing: 0.22em; text-transform: uppercase; color: var(--sand);
+      }
+      #si-t2-list .headline {
+        margin-top: 12px; text-wrap: balance;
+        font-family: var(--font-display); font-weight: var(--wt-bold); font-size: 62px;
+        line-height: 1.02; letter-spacing: var(--track-display); color: var(--bone);
+      }
+      #si-t2-list .rule { width: 120px; height: var(--rule); background: var(--terracotta); margin-top: 26px; }
+      #si-t2-list ul { list-style: none; margin: 34px 0 0; padding: 0; }
+      #si-t2-list li {
+        display: grid; grid-template-columns: 46px 1fr; align-items: start;
+        margin-top: 24px; text-wrap: balance;
+        font-size: 36px; font-weight: var(--wt-medium); line-height: 1.28; color: var(--bone);
+      }
+      #si-t2-list li::before {
+        content: ""; width: 12px; height: 24px; margin: 5px 0 0 10px;
+        border-right: 5px solid var(--sand); border-bottom: 5px solid var(--sand);
+        rotate: 45deg;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="si-t2-list" data-composition-id="si-t2-list" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="panel">
+        <div class="kicker" data-slot="kicker">What we fix first</div>
+        <div class="headline" data-slot="headline">Why the phone goes quiet</div>
+        <div class="rule"></div>
+        <ul data-slot="items">
+          <li>Missed calls, no text back</li>
+          <li>Old photos, wrong hours</li>
+          <li>Fewer reviews than rivals</li>
+          <li>Reviews with no reply</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        const root = document.getElementById("si-t2-list");
+        const css = getComputedStyle(document.documentElement);
+        const ease = (k, d) => css.getPropertyValue(k).trim() || d;
+        const IN = ease("--gsap-in", "power3.out"), WIPE = ease("--gsap-wipe", "power2.inOut");
+        const OUT = ease("--gsap-out", "power2.in");
+        const q = (s) => root.querySelector(s), qa = (s) => root.querySelectorAll(s);
+
+        const tl = gsap.timeline({ paused: true });
+        tl.fromTo(q(".panel"), { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: WIPE }, 0.05)
+          .fromTo(q(".kicker"), { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: IN }, 0.3)
+          .fromTo(q(".headline"), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: IN }, 0.4)
+          .fromTo(q(".rule"), { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.5, ease: WIPE }, 0.8)
+          .fromTo(qa("li"), { autoAlpha: 0, x: 24 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: IN, stagger: 0.45 }, 1.05)
+          .to(q(".panel"), { autoAlpha: 0, x: 40, duration: 0.45, ease: OUT }, 4.55);
+        window.__timelines["si-t2-list"] = tl;
+      })();
+    </script>
+  </body>
+</html>

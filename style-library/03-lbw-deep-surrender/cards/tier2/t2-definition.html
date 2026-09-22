@@ -1,0 +1,71 @@
+<!doctype html>
+<!--
+  LBW DEEP SURRENDER · tier2 · definition
+  TRANSPARENT: a frosted panel in the right column. Term in Playfair, word class
+  in Playfair italic, a gold hairline, then the plain-language definition.
+  Slots: term, kind, definition.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #lbw-t2-definition {
+        position: absolute; inset: 0; width: 1920px; height: 1080px;
+        background: transparent; font-family: var(--font-body);
+      }
+      #lbw-t2-definition .panel {
+        position: absolute; right: var(--safe-x); top: 300px; width: 600px; box-sizing: border-box;
+        padding: 48px 52px 50px;
+        background: var(--glass-bg); border: var(--glass-border); border-radius: var(--radius);
+        backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+        box-shadow: var(--glass-shadow);
+      }
+      #lbw-t2-definition .term {
+        font-family: var(--font-display); font-weight: var(--wt-bold);
+        font-size: 60px; line-height: 1.1; color: var(--cream);
+      }
+      #lbw-t2-definition .kind {
+        margin-top: 6px; font-family: var(--font-display); font-style: italic; font-weight: var(--wt-body);
+        font-size: 30px; color: var(--warm-sand);
+      }
+      #lbw-t2-definition .rule { width: 64px; height: var(--hairline); background: var(--gold); margin: 28px 0 26px; }
+      #lbw-t2-definition .definition {
+        margin: 0; font-weight: var(--wt-body); font-size: 32px; line-height: var(--lh-body);
+        color: var(--cream); text-wrap: balance;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="lbw-t2-definition" data-composition-id="lbw-t2-definition" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div class="panel">
+        <div class="term" data-slot="term">Breathwork</div>
+        <div class="kind" data-slot="kind">noun</div>
+        <div class="rule"></div>
+        <p class="definition" data-slot="definition">Any practice that uses intentional changes in breathing to shift how you feel, think, and respond.</p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const R = "#lbw-t2-definition ";
+      const D = parseFloat(document.getElementById("lbw-t2-definition").dataset.duration) || 5;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(R + ".panel", { autoAlpha: 0, y: 24 },
+                { autoAlpha: 1, y: 0, duration: 1.1, ease: "expo.out" }, 0.1)
+        .fromTo(R + ".term", { autoAlpha: 0, y: 12, filter: "blur(8px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.4, ease: "expo.out" }, 0.4)
+        .fromTo(R + ".kind", { autoAlpha: 0, y: 8 },
+                { autoAlpha: 1, y: 0, duration: 1.1, ease: "expo.out" }, 0.7)
+        .fromTo(R + ".rule", { scaleX: 0, transformOrigin: "0% 50%" },
+                { scaleX: 1, transformOrigin: "0% 50%", duration: 1.2, ease: "sine.inOut" }, 0.85)
+        .fromTo(R + ".definition", { autoAlpha: 0, y: 12, filter: "blur(6px)" },
+                { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.4, ease: "expo.out" }, 1.15)
+        .fromTo(R + ".definition", { x: 0 }, { x: 5, duration: D - 2.4, ease: "sine.inOut", immediateRender: false }, 1.6)
+        .to(R + ".panel", { autoAlpha: 0, y: 12, duration: 0.7, ease: "sine.inOut" }, D - 0.7);
+      window.__timelines["lbw-t2-definition"] = tl;
+    </script>
+  </body>
+</html>
